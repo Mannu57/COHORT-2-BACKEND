@@ -1,0 +1,10 @@
+# Ignore node modules everywhere
+node_modules/
+
+#Environment files
+.env 
+
+#Build folders
+dist/
+build/
+

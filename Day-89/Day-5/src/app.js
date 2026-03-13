@@ -11,6 +11,14 @@ app.use(express.json())
 
 const notes = []
 
+
+/**
+ * this is for bigning on browser
+ */
+app.get('/',(req,res)=>{
+  res.send("Server is running")
+})
+
 /**
  * POST /notes
 */
@@ -47,7 +55,7 @@ app.delete("/notes/:index", (req, res)=>{
  * PATCH /notes/:index
 */
 app.patch("/notes/:index", (req, res)=>{
-  notes[req.params.index].description = req.body
+  notes[req.params.index].description = req.body.description
 
   res.status(200).json({
     message: "Note updated successfully "
