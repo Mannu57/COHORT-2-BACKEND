@@ -1,0 +1,17 @@
+/**
+ * - Server start krna
+ * Database connect krna
+ */
+
+
+require('dotenv').config()
+const app = require('./src/app')
+
+const connectToDataBase = require('./src/config/database')
+connectToDataBase()
+
+
+app.listen(3000, ()=>{
+  console.log('Server is running on port 3000');
+  
+})
