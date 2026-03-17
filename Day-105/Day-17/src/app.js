@@ -6,24 +6,26 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
 
-const authRouter = require('./routes/auth.routes')
-const postRouter = require('./routes/post.routes')
+
 
 const app = express()
-
 app.use(express.json())// to read data in req.body
-
 app.use(cookieParser())
 
-/**
- * - api/auth/register
- */
-app.use('/api/auth', authRouter)
 
-/**
- * POST -api/posts
- */
+/* require routes */
+const authRouter = require('./routes/auth.routes')
+const postRouter = require('./routes/post.routes')
+const userRouter =  require('./routes/user.routes')
+
+
+
+/* using routes */
+app.use('/api/auth', authRouter)
 app.use('/api/posts', postRouter)
+app.use('/api/users', userRouter)
+
+
 
 
 module.exports = app

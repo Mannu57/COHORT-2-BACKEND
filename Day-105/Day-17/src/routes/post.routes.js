@@ -9,8 +9,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 const identifyUser = require('../middleware/auth.middleware')
 
 /**
- * POST api/posts [protected]
- * req.body = { caption, image-file }
+ * @routes POST api/posts [protected]
+ * @description Creating a post with the content and image (optional) provided
  */
 /** /api/posts */
 
@@ -22,7 +22,8 @@ postRouter.post(
 );
 
 /**
- * GET /api/posts/ [protected]
+ * @routes GET /api/posts/ [protected]
+ * @description Get all the posts created by the logged in user
  */
 postRouter.get(
   '/', 
@@ -32,14 +33,21 @@ postRouter.get(
 
 
 /**
- * GET api/posts/details/:postid
+ * @routes GET api/posts/details/:postid
  * 
- * - return detail about specific post with the id. Also check whether the post belongs to the user that the request come from
+ * @description return detail about specific post with the id. Also check whether the post belongs to the user that the request come from
  */
 postRouter.get(
   '/details/:postId', 
   identifyUser,
   postController.getPostDetailsController);
+
+
+  /**
+   * @routes POST api/posts/loke/:postid
+   * @description like a post with the id provided in the request params.
+   */
+  postRouter.post('/like/:postId', identifyUser, postController.likePostController)
 
 
 
