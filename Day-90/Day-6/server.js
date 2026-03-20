@@ -3,12 +3,12 @@
  * - database se connect krna
  */
 
-
+require('dotenv').config();
 const app = require('./src/app')
 const mongoose = require("mongoose")
 
 function connectToDb() {
-  mongoose.connect('mongodb+srv://Manu:Na1567FwwUiH5NgS@cluster0.dbc4pce.mongodb.net/day-6')
+  mongoose.connect('process.env.MONGO_URI')
   .then(()=>{
     console.log('Connected to Database');
     

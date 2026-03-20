@@ -1,0 +1,26 @@
+.feed-page{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .frrd{
+    max-width: 500px;
+    width: 100%;
+
+    .post{
+      width: 100%;
+    }
+
+    .post{
+      width: 100%;
+
+      .user{
+        img{
+          width: 1rem;
+          aspect-ratio: 1/1;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
