@@ -1,9 +1,10 @@
+const blacklistModel = require("../models/blacklist.model")
 const userModel = require("../models/user.model")
 
 const jwt = require("jsonwebtoken")
 
 async function authUser(req, res, next) {
-  const token = userModel.cookie.token
+  const token = req.cookies.token
 
   if(!token){
     return res.status(401).json({
@@ -11,12 +12,25 @@ async function authUser(req, res, next) {
     })
   }
 
+  const isTokenBlacklisted = await blacklistModel.findOne({
+    token
+  })
+
+  if(isTokenBlacklisted){
+    return res.status(401).json({
+      message: "Invalid token"
+    })
+  }
+
   try {
   const decoded = jwt.verify(
     token,
-    process.env.JWT_SECRET-KEY
+    process.env.JWT_SECRET,
   )
-  req.User = decoded
+  req.user = decoded
+
+  console.log('decoded:', decoded);
+  console.log('req.user:', req.user);
 
   next()
 
@@ -27,4 +41,6 @@ async function authUser(req, res, next) {
   }
 }
 
-module.exports = authUser
+module.exports = {
+  authUser,
+}

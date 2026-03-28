@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [ true, "Username is required "],
-    unique: true
+    unique: [true, "Username must be unique"]
   },
   email: {
     type: String,
@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Password is required"]
+    required: [true, "Password is required"],
+    select: false
   }
 })
 // Task
